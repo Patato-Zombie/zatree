@@ -64,16 +64,16 @@ class CChart_Zabbix extends CGraphDraw_Zabbix {
 	/********************************************************************************************************/
 	public function updateShifts() {
 		if ($this->yaxisleft == 1 && $this->yaxisright == 1) {
-			$this->shiftXleft = 50;  //原来是85
-			$this->shiftXright = 50; //原来是85
+			$this->shiftXleft = 75;  //原来是85
+			$this->shiftXright = 75; //原来是85
 		}
 		elseif ($this->yaxisleft == 1) {
-			$this->shiftXleft = 50;   //原来是85
+			$this->shiftXleft = 75;   //原来是85
 			$this->shiftXright = 20;  //原来是30
 		}
 		elseif ($this->yaxisright == 1) {
 			$this->shiftXleft = 20;  //原来是30
-			$this->shiftXright = 50; //原来是85
+			$this->shiftXright = 75; //原来是85
 		}
 	}
 
@@ -1355,7 +1355,7 @@ class CChart_Zabbix extends CGraphDraw_Zabbix {
 		}
 
 		if (!empty($unitsLong)) {
-			$dims = imageTextSize(9, 90, $unitsLong);
+			$dims = imageTextSize(8, 90, $unitsLong);
 
 			$tmpY = $this->sizeY / 2 + $this->shiftY+$dims['height'] / 2;
 			if ($tmpY < $dims['height']) {
@@ -1465,7 +1465,7 @@ class CChart_Zabbix extends CGraphDraw_Zabbix {
 		}
 
 		if (!empty($unitsLong)) {
-			$dims = imageTextSize(9, 90, $unitsLong);
+			$dims = imageTextSize(8, 90, $unitsLong);
 
 			$tmpY = $this->sizeY / 2 + $this->shiftY + $dims['height'] / 2;
 			if ($tmpY < $dims['height']) {

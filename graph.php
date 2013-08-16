@@ -71,15 +71,21 @@ $fortime=date("YmdHis",strtotime($stime));
 $width=286;//图形宽度
 global $zabbix_api_config;
 
-$url_http=dirname(dirname('http://'.$_SERVER['SERVER_NAME'].$_SERVER["REQUEST_URI"]));
+$port= $_SERVER['SERVER_PORT'];
+if($port !=80){
+	$url_http=dirname(dirname('http://'.$_SERVER['SERVER_NAME'].':'.$port.$_SERVER["REQUEST_URI"]));
+}else{
+	$url_http=dirname(dirname('http://'.$_SERVER['SERVER_NAME'].$_SERVER["REQUEST_URI"]));
+}
+
 $zabbixApi = new ZabbixApi($url_http.'/'.trim($zabbix_api_config['api_url']),trim($zabbix_api_config['user']),trim($zabbix_api_config['passowrd']));
 ?>
-<form method="get" style="font-size:8px;text-align:left;padding-left:50px;" id="searchForm" >
+<form method="get" style="font-size:8px;text-align:left;padding-left:10px;" id="searchForm" >
 <input type="hidden" name="hostid" value="<?php echo $hostid;?>"/>
 <input type="hidden" name="group_class" value="<?php echo $group_class;?>"/>
 开始时间：<input type="text"   value="<?php echo $stime;?>"  width="100px;" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  id="stime"  name="stime"/> &nbsp;
 结束时间：<input type="text" id="endtime"  value="<?php echo $endtime;?>" width="100px;" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  name="endtime"/>&nbsp;
-关键字:<input type="text" style="width:100px;" id="itemkey" name="itemkey" value="<?php echo $itemkey;?>" />&nbsp;
+关键字:<input type="text" style="width:130px;" id="itemkey" name="itemkey" value="<?php echo $itemkey;?>" />&nbsp;
 排序：<select id="order_key" name="order_key">
 <option value=''>默认</option>
 <option value="lastvalue" <?php if($orderkey=='lastvalue'){ echo 'selected="selected"';};?>>最新</option>
@@ -172,7 +178,8 @@ if ((isset($_REQUEST["hostid"]) && $_REQUEST["hostid"] > 0) || ($group_class != 
 	$big_graph = "../zabbix_chart.php?graphid=".$result['graphid']."&width=".$zoom_width."&height=".$zoom_height."&stime=".$fortime."&period=".$period."&box=box.jpg";
 	$small_graph = "../zabbix_chart.php?graphid=".$result['graphid']."&width=".$width."&height=70&stime=".$fortime."&period=".$period."&box=box.jpg";
 ?>
-<a class="fancybox" rel="group" href=<?php echo $big_graph; ?> >  <img  src="<?php echo $small_graph; ?>" width="357" height="211" style="float:left;padding-top:4px;padding-left:4px;"  /> </a>
+<a class="fancybox" rel="group" href=<?php echo $big_graph; ?> >
+<img  src="<?php echo $small_graph; ?>" width="357" height="211" style="float:left;padding-top:4px;padding-left:4px;"  /> </a>
 <?php
 }
 
