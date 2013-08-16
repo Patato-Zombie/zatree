@@ -49,7 +49,7 @@ if (!isset($_GET["itemkey"]) && !isset($_GET["stime"]) && !isset($_GET["endtime"
 		SetCookie("stime", $stime, $curtime+3600);
 		SetCookie("endtime", $endtime, $curtime+3600);
 		SetCookie("order_key", $orderkey, $curtime+3600);
-	SetCookie("order_type", $ordertype,$curtime+3600);
+		SetCookie("order_type", $ordertype,$curtime+3600);
 	}
 } else {
 	$itemkey=isset($_GET["itemkey"]) ? $_GET["itemkey"] : '';
@@ -74,7 +74,7 @@ global $zabbix_api_config;
 $url_http=dirname(dirname('http://'.$_SERVER['SERVER_NAME'].$_SERVER["REQUEST_URI"]));
 $zabbixApi = new ZabbixApi($url_http.'/'.trim($zabbix_api_config['api_url']),trim($zabbix_api_config['user']),trim($zabbix_api_config['passowrd']));
 ?>
-<form method="get" action="graph.php" style="font-size:8px;text-align:left;padding-left:50px;" >
+<form method="get" style="font-size:8px;text-align:left;padding-left:50px;" id="searchForm" >
 <input type="hidden" name="hostid" value="<?php echo $hostid;?>"/>
 <input type="hidden" name="group_class" value="<?php echo $group_class;?>"/>
 开始时间：<input type="text"   value="<?php echo $stime;?>"  width="100px;" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  id="stime"  name="stime"/> &nbsp;
@@ -86,14 +86,13 @@ $zabbixApi = new ZabbixApi($url_http.'/'.trim($zabbix_api_config['api_url']),tri
 <option value="max" <?php if($orderkey=='max'){ echo 'selected="selected"';};?>>最大</option>
 <option value="min" <?php if($orderkey=='min'){ echo 'selected="selected"';};?>>最小</option>
 <option value="avg" <?php if($orderkey=='avg'){ echo 'selected="selected"';};?>>平均</option>
-</select>
-&nbsp;
+</select>&nbsp;
 <select id="order_type" name="order_type">
 <option value=''>默认</option>
 <option value="asc" <?php if($ordertype=='asc'){echo 'selected="selected"';};?>>升序</option>
 <option value="desc" <?php if($ordertype=='desc'){echo 'selected="selected"';};?>>降序</option>
 </select>
-&nbsp;<input type="submit" value="搜索"/>
+&nbsp;<input type="button" value="搜索" onclick="onCheckSubmit();"/>
 &nbsp;<input type="button" value="清除" onclick="clearCookie();"/>
 <input type ="button" onclick="javascript:window.parent.location.href='<?php echo "http://".$_SERVER ['HTTP_HOST']; ?>'" value="回到首頁" />
 </form>
@@ -209,6 +208,20 @@ function clearCookie() {
 				window.parent.frames["rightFrame"].location.reload(); 
 			}
 	});
+}
+
+function onCheckSubmit(){
+	var orderkey= $("select[name='order_key']").val();
+	var ordertype=$("select[name='order_type']").val();
+	var itemkey=$("#itemkey").val();
+
+	if((orderkey == '' && ordertype !='') || (orderkey != '' && ordertype =='')){
+		alert('排序对象、排序方式要同时选择或同时默认');
+		return false;
+	}
+
+	$("#searchForm").attr("action",'graph.php');
+	$("#searchForm").submit();
 }
 
 $(document).ready(function(){
