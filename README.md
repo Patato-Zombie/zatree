@@ -95,10 +95,15 @@ display_errors = On
 2：Fatal error: Call to undefined function json_encode() in /var/www/html/zabbix/zatree/ZabbixApiAbstract.class.php on line 220
 
 需要php encode支持
+
 yum install php-pecl-json
+
 如果上面这个方法不行，找不到php-pecl-json，试试下面这个方法
+
 yum install php-pear
+
 pecl install json
+
 echo "extension=json.so" > /etc/php.d/json.ini
 
 3：如果左侧显示一行2个图，说明你分辨率不够，叫老板给你换个机器
