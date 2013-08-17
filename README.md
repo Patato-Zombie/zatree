@@ -85,7 +85,11 @@ vi $ZABBIX_PATH/include/classes/api/API.php
 效果展示
 ==================================
 
+zatree首页
+
 ![image](https://github.com/spide4k/zatree/raw/master/screenshots/1.jpg)
+
+单个图像放大效果
 
 ![image](https://github.com/spide4k/zatree/raw/master/screenshots/2.jpg)
 
