@@ -85,9 +85,9 @@ vi $ZABBIX_PATH/include/classes/api/API.php
 效果展示
 ==================================
 
-![image](https://github.com/spider4k/screenshots/1.jpg)
+![image](https://github.com/spide4k/zatree/master/screenshots/1.jpg)
 
-![image](https://github.com/spider4k/screenshots/2.jpg)
+![image](https://github.com/spide4k/zatree/master/screenshots/2.jpg)
 
 常见问题
 ==================================
