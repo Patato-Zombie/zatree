@@ -255,10 +255,12 @@ $(document).ready(function(){
 	})
 </script>
 
-<div>感谢<a href="http://www.zabbix.com" target="_blank">zabbix</a>这么牛逼的监控软件</br>
-<a href="https://github.com/spide4k/zatree" target="_blank">Zatree</a>技术支持：<a href="http://weibo.com/spider4k" target="_blank">@南非蜘蛛</a>
+<div align="center" style='font-size:12px;'>
+<a href="https://github.com/spide4k/zatree" target="_blank">Zatree</a> version 1.0.1</br>
+感谢<a href="http://www.zabbix.com" target="_blank">zabbix</a>这么牛逼的监控软件
+技术支持：<a href="http://weibo.com/spider4k" target="_blank">@南非蜘蛛</a>
 <a href="http://weibo.com/chinahanna" target="_blank">@hanna</a>
 <a href="http://weibo.com/678236656" target="_blank">@lijian</a>
 </div>
-
+</br>
 </body>
