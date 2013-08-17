@@ -1742,7 +1742,7 @@ class CChart_Zabbix extends CGraphDraw_Zabbix {
 
 		$row = array(
 			array('text' => ''),
-			array('text' => ''),
+			//array('text' => ''),
 			array('text' => _('last'), 'align' => 1, 'fontsize' => 7),
 			array('text' => _('min'), 'align' => 1, 'fontsize' => 7),
 			array('text' => _('avg'), 'align' => 1, 'fontsize' => 7),
@@ -1789,7 +1789,7 @@ class CChart_Zabbix extends CGraphDraw_Zabbix {
 
 				$legend->addCell($colNum, array('text' => $item_caption));
 				//$legend->addCell($colNum, array('text' => '['.$fnc_name.']'));
-				$legend->addCell($colNum, array('text' => ''));
+				//$legend->addCell($colNum, array('text' => ''));
 				$legend->addCell($colNum, array('text' => convert_units($this->getLastValue($i), $this->items[$i]['units'], ITEM_CONVERT_NO_UNITS), 'align' => 2));
 				$legend->addCell($colNum, array('text' => convert_units(min($data['min']), $this->items[$i]['units'], ITEM_CONVERT_NO_UNITS), 'align' => 2));
 				$legend->addCell($colNum, array('text' => convert_units($data['avg_orig'], $this->items[$i]['units'], ITEM_CONVERT_NO_UNITS), 'align' => 2));

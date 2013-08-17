@@ -1,5 +1,6 @@
 Zatree简介
 ==================================
+
 当zabbix走进千家万户的时候，我们也许需要做点什么。
 
 zatree是监控软件zabbix的一个插件，主要功能是提供host group的树形展示和在item里指定关键字查询及数据排序。
@@ -8,6 +9,7 @@ zatree是监控软件zabbix的一个插件，主要功能是提供host group的树形展示和在item里指
 
 Zatree安装
 ==================================
+
 1：下载文件
 
 git clone https://github.com/spide4k/zatree.git zatree
@@ -82,6 +84,7 @@ vi $ZABBIX_PATH/include/classes/api/API.php
 
 常见问题
 ==================================
+
 1：如果排错？
 
 可以打开php的显示错误，看看什么原因
@@ -106,7 +109,9 @@ pecl install json
 
 echo "extension=json.so" > /etc/php.d/json.ini
 
-3：如果右侧显示一行2个图，说明你分辨率不够，叫老板给你换个机器
+3：如果右侧显示一行2个图，说明你分辨率不够，叫老板给你换个机器,或者修改graph.php文件这行的width值
+
+    181 <img  src="<?php echo $small_graph; ?>" width="357" height="211" style="float:left;padding-top:4px;padding-left:4px;"  /> </a>
 
 4：如果不想在小图里显示时间段，编辑文件include/classes/class.cchart_zabbix.php，注释2363行
 
@@ -114,6 +119,7 @@ echo "extension=json.so" > /etc/php.d/json.ini
 
 技术支持
 ==================================
+
 http://weibo.com/spider4k
 
 http://weibo.com/chinahanna
