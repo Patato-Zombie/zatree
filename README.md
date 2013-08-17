@@ -82,6 +82,13 @@ vi $ZABBIX_PATH/include/classes/api/API.php
 
 7：登陆zabbix，在导航里可以看到一个Zatree的菜单，使用方法是傻瓜的
 
+效果展示
+==================================
+
+![image](https://github.com/spider4k/screenshots/1.jpg)
+
+![image](https://github.com/spider4k/screenshots/2.jpg)
+
 常见问题
 ==================================
 
