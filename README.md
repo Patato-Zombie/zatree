@@ -109,7 +109,7 @@ pecl install json
 
 echo "extension=json.so" > /etc/php.d/json.ini
 
-3：如果右侧显示一行2个图，说明你分辨率不够，叫老板给你换个机器,或者修改graph.php文件这行的width值
+3：如果右侧显示一行2个图，说明你分辨率不够，叫老板给你换个机器，或者修改graph.php文件这行的width值
 
     181 <img  src="<?php echo $small_graph; ?>" width="357" height="211" style="float:left;padding-top:4px;padding-left:4px;"  /> </a>
 
