@@ -82,7 +82,7 @@ vi $ZABBIX_PATH/include/classes/api/API.php
 
 7：登陆zabbix，在导航里可以看到一个Zatree的菜单，使用方法是傻瓜的
 
-截屏展示
+屏幕截图
 ==================================
 
 zatree首页
@@ -124,7 +124,7 @@ echo "extension=json.so" > /etc/php.d/json.ini
 
     181 <img  src="<?php echo $small_graph; ?>" width="357" height="211" style="float:left;padding-top:4px;padding-left:4px;"  /> </a>
 
-4：如果不想在小图里显示时间段，编辑文件include/classes/class.cchart_zabbix.php，注释2363行
+4：如果想在小图里显示时间段，编辑文件include/classes/class.cchart_zabbix.php，打开2363行
 
      2363                 //      $this->drawDate();
 

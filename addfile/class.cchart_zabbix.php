@@ -2360,7 +2360,7 @@ class CChart_Zabbix extends CGraphDraw_Zabbix {
 
 		if ($this->drawLegend) {
 			//»­³öÊ±¼ä
-			$this->drawDate();
+			//$this->drawDate();
 	        $this->drawTriggers();
 			$this->drawPercentile();
 			$this->drawLegend();
