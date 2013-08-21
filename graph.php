@@ -71,12 +71,7 @@ $fortime=date("YmdHis",strtotime($stime));
 $width=286;//图形宽度
 global $zabbix_api_config;
 
-$port= $_SERVER['SERVER_PORT'];
-if($port !=80){
-	$url_http=dirname(dirname('http://'.$_SERVER['SERVER_NAME'].':'.$port.$_SERVER["REQUEST_URI"]));
-}else{
-	$url_http=dirname(dirname('http://'.$_SERVER['SERVER_NAME'].$_SERVER["REQUEST_URI"]));
-}
+$url_http=dirname(dirname('http://'.$_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"]));
 
 $zabbixApi = new ZabbixApi($url_http.'/'.trim($zabbix_api_config['api_url']),trim($zabbix_api_config['user']),trim($zabbix_api_config['passowrd']));
 ?>
