@@ -95,7 +95,7 @@ $zabbixApi = new ZabbixApi($url_http.'/'.trim($zabbix_api_config['api_url']),tri
 </select>
 &nbsp;<input type="button" value="搜索" onclick="onCheckSubmit();"/>
 &nbsp;<input type="button" value="清除" onclick="clearCookie();"/>
-<input type ="button" onclick="javascript:window.parent.location.href='<?php echo "http://".$_SERVER ['HTTP_HOST']; ?>'" value="回到首頁" />
+<input type ="button" onclick="javascript:window.parent.location.href='<?php echo $url_http; ?>'" value="回到首頁" />
 </form>
 
 <p></p>
