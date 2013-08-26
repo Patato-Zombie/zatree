@@ -93,6 +93,11 @@ zatree首页
 
 ![image](https://github.com/spide4k/zatree/raw/master/screenshots/2.jpg)
 
+交流
+==================================
+
+QQ讨论群：216490997
+
 常见问题
 ==================================
 
@@ -127,6 +132,18 @@ echo "extension=json.so" > /etc/php.d/json.ini
 4：如果想在小图里显示时间段，编辑文件include/classes/class.cchart_zabbix.php，打开2363行
 
      2363                 //      $this->drawDate();
+
+5:报以下错误
+
+Warning: array_key_exists() expects parameter 2 to be array, null given in zatree/ZabbixApiAbstract.class.php on line 255
+
+Notice: Trying to get property of non-object in zatree/ZabbixApiAbstract.class.php on line 262
+
+Warning: Invalid argument supplied for foreach() in zatree/graph.php online 130
+
+内存溢出，修改php.ini调整大小为XXX
+memory_limit = XXXM
+
 
 技术支持
 ==================================
