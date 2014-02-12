@@ -144,6 +144,8 @@ Warning: Invalid argument supplied for foreach() in zatree/graph.php online 130
 内存溢出，修改php.ini调整大小为XXX
 memory_limit = XXXM
 
+6:是否支持搜索多个关键字？
+支持，关键字用逗号分隔
 
 技术支持
 ==================================
