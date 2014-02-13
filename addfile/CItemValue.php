@@ -199,7 +199,7 @@ class CItemValue extends CZBXAPI {
 
             if ($search == 0) {
                 $newItem['graphid'] = $each_item['graphid'];
-                $order_result_list[$newItem['graphid']] = array("graphid" => $newItem['graphid'], "itemname" => $newItem['name'], "lastvalue" => 0, 'min' => 0, 'avg' => 0, 'max' => 0, 'hostname' => $newItem['hostname']);
+                $order_result_list[$newItem['graphid']] = array("graphid" => $newItem['graphid'], "itemname" => $newItem['name'], "lastvalue" => 0, 'min' => 0, 'avg' => 0, 'max' => 0, 'hostname' => $newItem['hostname'],'chazhi'=>0);
             } else {
 
                 foreach ($search_key_list as $each_search_key) {
@@ -223,9 +223,9 @@ class CItemValue extends CZBXAPI {
                             $avg = convert_units($data['avg_orig'], $newItem['units'], ITEM_CONVERT_NO_UNITS);
                             $max = convert_units(max($data['max']), $newItem['units'], ITEM_CONVERT_NO_UNITS);
                             //return array("lastvalue"=>$lastvalue,'min'=>$min,'avg'=>$avg,'max'=>$max);
-                            $order_result_list[$each_search_key][$newItem['graphid']] = array("graphid" => $newItem['graphid'], "itemname" => $newItem['name'], "lastvalue" => self::getLastValueBy($data), 'min' => min($data['min']), 'avg' => $data['avg_orig'], 'max' => max($data['max']), 'hostname' => $newItem['hostname']);
+                            $order_result_list[$each_search_key][$newItem['graphid']] = array("graphid" => $newItem['graphid'], "itemname" => $newItem['name'], "lastvalue" => self::getLastValueBy($data), 'min' => min($data['min']), 'avg' => $data['avg_orig'], 'max' => max($data['max']), 'hostname' => $newItem['hostname'],'chazhi'=>max($data['max'])-min($data['min']));
                         } else {
-                            $order_result_list[$each_search_key][$newItem['graphid']] = array("graphid" => $newItem['graphid'], "itemname" => $newItem['name'], "lastvalue" => 0, 'min' => 0, 'avg' => 0, 'max' => 0, 'hostname' => $newItem['hostname']);
+                            $order_result_list[$each_search_key][$newItem['graphid']] = array("graphid" => $newItem['graphid'], "itemname" => $newItem['name'], "lastvalue" => 0, 'min' => 0, 'avg' => 0, 'max' => 0, 'hostname' => $newItem['hostname'],'chazhi'=>0);
                         }
                         break;
                     }

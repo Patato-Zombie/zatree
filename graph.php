@@ -104,6 +104,9 @@
                 <option value="avg" <?php if ($orderkey == 'avg') {
             echo 'selected="selected"';
         }; ?>>平均</option>
+                <option value="chazhi" <?php if ($orderkey == 'chazhi') {
+            echo 'selected="selected"';
+        }; ?>>差值</option>
             </select>&nbsp;
             <select id="order_type" name="order_type">
                 <option value=''>默认</option>
@@ -161,48 +164,40 @@
             }
             $order_list_result = (array) $format_list;
             //对结果进行排序
-
+             // print_r($order_list_result);
             if ($orderkey != '' && $ordertype != '') {
 
                 if (empty($itemkey)) {
-                    if ($orderkey == 'avg') {
-                        $arr = array_map(create_function('$sort', 'return $sort["avg"];'), $order_list_result);
-                    } elseif ($orderkey == 'min') {
-                        $arr = array_map(create_function('$sort', 'return $sort["min"];'), $order_list_result);
-                    } elseif ($orderkey == 'max') {
-                        $arr = array_map(create_function('$sort', 'return $sort["max"];'), $order_list_result);
-                    } elseif ($orderkey == 'lastvalue') {
-                        $arr = array_map(create_function('$sort', 'return $sort["lastvalue"];'), $order_list_result);
-                    } else {
-                        $arr = array_map(create_function('$sort', 'return $sort["hostname"];'), $order_list_result);
-                    }
+                    $sort_key=$orderkey == '' ? 'hostname' :  $orderkey;
+                    $arr = array_map(create_function('$sort', 'return $sort["'.$sort_key.'"];'), $order_list_result);
                     if ($ordertype == "asc") {
                         array_multisort($arr, SORT_ASC, $order_list_result);
                     } else {
                         array_multisort($arr, SORT_DESC, $order_list_result);
                     }
+ 
                 } else {
                     $search_key_list = explode(",", $itemkey);
+                    $sort_new_list=array();
                     foreach ($search_key_list as $each_search_key) {
                         $each_search_key = trim($each_search_key);
-                        if ($orderkey == 'avg') {
-                            $arr[$each_search_key] = array_map(create_function('$sort', 'return $sort["avg"];'),  isset($order_list_result[$each_search_key])? $order_list_result[$each_search_key]:array());
-                        } elseif ($orderkey == 'min') {
-                            $arr[$each_search_key] = array_map(create_function('$sort', 'return $sort["min"];'), isset($order_list_result[$each_search_key])? $order_list_result[$each_search_key]:array());
-                        } elseif ($orderkey == 'max') {
-                            $arr[$each_search_key] = array_map(create_function('$sort', 'return $sort["max"];'), isset($order_list_result[$each_search_key])? $order_list_result[$each_search_key]:array());
-                        } elseif ($orderkey == 'lastvalue') {
-                            $arr[$each_search_key] = array_map(create_function('$sort', 'return $sort["lastvalue"];'), isset($order_list_result[$each_search_key])? $order_list_result[$each_search_key]:array());
-                        } else {
-                            $arr[$each_search_key] = array_map(create_function('$sort', 'return $sort["hostname"];'), isset($order_list_result[$each_search_key])? $order_list_result[$each_search_key]:array());
-                        }
+                        $order_list_result_search=isset($order_list_result[$each_search_key])? $order_list_result[$each_search_key]:array();
+                        $sort_key=$orderkey == '' ? 'hostname' :  $orderkey;
+                        $arr[$each_search_key] = array_map(create_function('$sort', 'return $sort["'.$sort_key.'"];'), $order_list_result_search );
+                      
                         if ($ordertype == "asc") {
-                            array_multisort($arr[$each_search_key], SORT_ASC, isset($order_list_result[$each_search_key])? $order_list_result[$each_search_key]:array());
+                            array_multisort($arr[$each_search_key], SORT_ASC, $order_list_result_search);
                         } else {
-                            array_multisort($arr[$each_search_key], SORT_DESC, isset($order_list_result[$each_search_key])? $order_list_result[$each_search_key]:array());
+                            array_multisort($arr[$each_search_key], SORT_DESC, $order_list_result_search);
                         }
+                       if(count($order_list_result_search)){
+                           $sort_new_list[$each_search_key]=$order_list_result_search;
+                       } 
                     }
+                    $order_list_result=$sort_new_list;
                 }
+                
+               
             }
             //获取当前页的数据
             if (count($order_list_result) > 0) {
@@ -226,6 +221,7 @@
                
                 $page_link = $page->show(1);
                 $order_list_result_page = $page->_get_result();
+               // print_r($order_list_result_page);
             }
             if (isset($page_link)) {
                 ?>
@@ -243,16 +239,19 @@
                 $zoom_x = 3; //点击小图看大图，放大三倍
                 $zoom_width = $width * $zoom_x;
                 $zoom_height = 70 * $zoom_x;
-                //  if(empty($itemkey)){
+                
                 $big_graph = "../zabbix_chart.php?graphid=" . $result['graphid'] . "&width=" . $zoom_width . "&height=" . $zoom_height . "&stime=" . $fortime . "&period=" . $period . "&box=box.jpg";
                 $small_graph = "../zabbix_chart.php?graphid=" . $result['graphid'] . "&width=" . $width . "&height=70&stime=" . $fortime . "&period=" . $period . "&box=box.jpg";
-                //  }else{
-                //  $big_graph = "../zabbix_chart.php?graphid=".$result[$key]['graphid']."&width=".$zoom_width."&height=".$zoom_height."&stime=".$fortime."&period=".$period."&box=box.jpg";
-                //  $small_graph = "../zabbix_chart.php?graphid=".$result[$key]['graphid']."&width=".$width."&height=70&stime=".$fortime."&period=".$period."&box=box.jpg";  
-                // }
+             
                 ?>
+                <div style="width:357px;float: left; text-align: left;margin: 5px 3px 0px 0px;">
+                <?php  if($orderkey=='chazhi'){ ?>
+                <span style=" padding-left: 6px;font-size: 12px; ">差值:<?php echo $result['chazhi']; ?></span>
+                <?php } ?>
                 <a class="fancybox" rel="group" href=<?php echo $big_graph; ?> >
                     <img  src="<?php echo $small_graph; ?>" width="357" height="211" style="float:left;padding-top:4px;padding-left:4px;"  /> </a>
+                </div>  
+                    
                 <?php
             }
         }
